@@ -10,7 +10,7 @@ public class SVNUtils
 {
     private static List<string> drives = new List<string>() { "c:", "d:", "e:", "f:" };
     private static string svnPath = @"\Program Files\TortoiseSVN\bin\";
-    private static string svnProc = @"TortoiseProc.exe";
+    private static string svnProc = @"TortoiseProc.exe"; // 加上@ 转义字符‘\’不起作用了
     private static string svnProcPath = "";
 
     [MenuItem("Assets/SVN更新 %&e")]
@@ -79,8 +79,8 @@ public class SVNUtils
         foreach (var item in drives)
         {
             var path = string.Concat(item, svnPath, svnProc);
-           // if (File.Exists(path))
-               // return path;
+            if (File.Exists(path))
+                return path;
         }
         return EditorUtility.OpenFilePanel("Select TortoiseProc.exe", "c:\\", "exe");
     }
